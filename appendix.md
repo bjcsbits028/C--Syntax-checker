@@ -36,6 +36,8 @@ So the expression becomes "b=ex3", which in reverse polish notation can be writt
 
 ['b', 'true', '?', 'a', 'b', 2, '-', '/', 3, 4, 5, '+', '*',':', '='] is the final form required as input in prolog.
 
+============
+
 Please apply the above definition recusively to generate all the expressions.
 
 Note that we have assumed our own reverse polish notation regarding conditional("?" and ":") and equal-to("=") operations in C.
