@@ -75,22 +75,22 @@ look(Z, [], A).
 
 %recursive step
 look(Z, [H|T], A) :- (
-					last(H, Z) -> head(W, H), (
-							W = 'address' -> (
-								second('int', H) -> A = 'address_to_int';
-								second('float', H) -> A = 'address_to_float';
-								second('boolean', H) -> A = 'address_to_boolean';
-								second('bitset', H) -> A = 'address_to_bitset';
-								writeln('Input Error'), abort	
-							);
-							member(W, ['int']) -> A = 'var_int';
-							member(W, ['float']) -> A = 'var_float';
-							member(W, ['boolean']) -> A = 'var_boolean';
-							member(W, ['bitset']) -> A = 'var_bitset';
-							writeln('Datatype is incorrect'), abort
-						); 
-						look(Z, T, A)
-					).
+		last(H, Z) -> head(W, H), (
+				W = 'address' -> (
+					second('int', H) -> A = 'address_to_int';
+					second('float', H) -> A = 'address_to_float';
+					second('boolean', H) -> A = 'address_to_boolean';
+					second('bitset', H) -> A = 'address_to_bitset';
+					writeln('Input Error'), abort	
+				);
+				member(W, ['int']) -> A = 'var_int';
+				member(W, ['float']) -> A = 'var_float';
+				member(W, ['boolean']) -> A = 'var_boolean';
+				member(W, ['bitset']) -> A = 'var_bitset';
+				writeln('Datatype is incorrect'), abort
+			); 
+			look(Z, T, A)
+		).
 
 %FUNCTOR- TYPE CHECKER (MAIN PROGRAM CALL LINE)
 is_correct(X, W, ANS):-	checker(X, W, ANS, []).
