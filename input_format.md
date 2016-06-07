@@ -20,6 +20,8 @@
 
  All other variables and operators should be entered inside ' '. 
 
-3.	The third member is simply the variable ANS.
+3)	The third member is simply the variable ANS.
+
+
 
 [111]: https://github.com/likecs/C--Syntax-checker/blob/master/appendix.md
