@@ -5,12 +5,19 @@ Below is the list of some sample test cases with their respective output when th
 1. is_correct([['int', 'x'], ['int', 'y']], [2,3,'<','x' ,'y', '>','&&'], ANS).
 
 	[]
+
 	[int]
+	
 	[int,int]
+	
 	[boolean]
+	
 	[var_int,boolean]
+	
 	[var_int,var_int,boolean]
+	
 	[boolean,boolean]
+	
 	ANS=boolean
 
 2. is_correct([['int', 'x'], ['int', 'y']], [2,'<','x' ,'y', '>','&&'], ANS).
