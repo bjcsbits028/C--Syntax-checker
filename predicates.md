@@ -4,27 +4,27 @@
 
 1.	is_correct([[],[]...],['','','',''....],ANS)
 	
-	Details refer to [Basic Information][111].
+	Details refer to [Input format][111].
 
 2.	look(X, Z ,A) 			
 	
 	X is the first list of the input as given in is_correct() functor, 
 	Z is the variable name to be searched in the list, 
-	A is an auxilliary variable
+	A is an auxilliary variable.
 
 3.	pop(List1, X, List2) 	
 	
-	It is used to implement the standard pop operation as in a stack with an element being removed from List1 to form List2
+	It is used to implement the standard pop operation as in a stack with an element being removed from List1 to form List2.
 
 4.	push(X, List1, List2) 	
 
-	It is used to implement the standard push operation as in a stack with an element X being appended to List1 to form List2
+	It is used to implement the standard push operation as in a stack with an element X being appended to List1 to form List2.
 
-5.	checker(X, W, Ans, []) 	
+5.	checker(X, W, Ans, [])	
 	
 	X is the first list of input, 
 	W is the second list, 
-	Ans is an auxilliary variable,[] is an empty list
+	Ans is an auxilliary variable,[] is an empty list.
 	
 	This is the main functor doing the type checking. It is based on the similar concept of evaluating an expression given in reverse polish notation. The type of each variable and constant is pushed into the stack continuously and when an operator is encountered, type checking is done while popping the members from the stack till the expression is found to be type correct. The intermediate result of the expression evaluated is again pushed to the stack. Once the stack is empty, we get the final result of the expression.
 
@@ -91,4 +91,4 @@
 
 
 
-[111]: 
+[111]: https://github.com/likecs/C--Syntax-checker/blob/master/input_format.md
