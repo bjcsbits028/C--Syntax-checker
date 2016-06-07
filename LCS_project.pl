@@ -75,35 +75,23 @@ second(W, [_,W|_]).
 look(Z, [], A).	
 
 %recursive step
-look(Z, [H|T], A) :- 	
-						(
-							last(H, Z) ->
-								head(W, H),
-								(
-									W = 'address' ->
-									(
-										second('int', H) ->
-											A = 'address_to_int';
-										second('float', H) ->
-											A = 'address_to_float';
-										second('boolean', H) ->
-											A = 'address_to_boolean';
-										second('bitset', H) ->
-											A = 'address_to_bitset';
-										writeln('Input Error'), abort																			
-									);
-									member(W, ['int']) ->
-										A = 'var_int';
-									member(W, ['float']) ->
-									    A = 'var_float';
-									member(W, ['boolean'])  ->
-										A = 'var_boolean';
-									member(W, ['bitset']) ->
-										A = 'var_bitset';
-									writeln('Datatype is incorrect'), abort
-								);
-							look(Z, T, A)
-						).
+look(Z, [H|T], A) :- (
+					last(H, Z) -> head(W, H), (
+							W = 'address' -> (
+								second('int', H) -> A = 'address_to_int';
+								second('float', H) -> A = 'address_to_float';
+								second('boolean', H) -> A = 'address_to_boolean';
+								second('bitset', H) -> A = 'address_to_bitset';
+								writeln('Input Error'), abort	
+							);
+							member(W, ['int']) -> A = 'var_int';
+							member(W, ['float']) -> A = 'var_float';
+							member(W, ['boolean']) -> A = 'var_boolean';
+							member(W, ['bitset']) -> A = 'var_bitset';
+							writeln('Datatype is incorrect'), abort
+						); 
+					look(Z, T, A)
+					).
 
 %FUNCTOR- TYPE CHECKER (MAIN PROGRAM CALL LINE)
 is_correct(X, W, ANS):-	checker(X, W, ANS, []).
@@ -117,12 +105,9 @@ checker(X, [], ANS, [H|StackQ]) :- write('ANS='), writeln(H), abort.
 
 %recursive step
 %used if-elseif-else opeartions
-checker(X, [Q|Z], ANS, Stack1):-
-				writeln(Stack1),
-				(
+checker(X, [Q|Z], ANS, Stack1):- writeln(Stack1), (
 					%built-in function to check whether input is number or not
-					number(Q) -> 
-					(
+					number(Q) -> (
 						integer(Q) -> 
 							ANS = 'int', push(ANS, Stack1, Stack), checker(X, Z, J, Stack);
 						float(Q) ->
@@ -131,32 +116,25 @@ checker(X, [Q|Z], ANS, Stack1):-
 					);
 					member(Q,[true,false]) ->
 						ANS = 'boolean', push(ANS, Stack1, Stack), checker(X, Z, J, Stack);
-					operator(Q) ->
-					(
-						pop(Stack1, Second, Stack),
-						(
-							unop(Q) ->
-							(
-								member(Q, ['!']) ->
-								(
+					operator(Q) -> (
+						pop(Stack1, Second, Stack), (
+							unop(Q) -> (
+								member(Q, ['!']) -> (
 									member(Second, ['int', 'var_int', 'float', 'var_float', 'bitset', 'var_bitset', 'boolean', 'var_boolean']) ->
-										ANS = 'boolean', writeln(Stack), push(ANS, Stack, StackF);
+									ANS = 'boolean', writeln(Stack), push(ANS, Stack, StackF);
 									writeln('false'), abort
 								);
-								member(Q, ['~']) ->
-								(
+								member(Q, ['~']) -> (
 									member(Second, ['int', 'var_int', 'float', 'var_float', 'bitset', 'var_bitset']) ->
-										ANS = 'bitset', push(ANS, Stack, StackF);
+									ANS = 'bitset', push(ANS, Stack, StackF);
 									writeln('false'), abort
 								);
-								terqop(Q) ->
-								(
+								terqop(Q) -> (
 									member(Second, ['boolean', 'var_boolean']) ->
-										StackF = Stack;
+									StackF = Stack;
 									writeln('The test expression should have evaluated to boolean'), abort
 								);
-								member(Q, ['*']) ->
-								(
+								member(Q, ['*']) -> (
 									member(Second, ['address_to_int']) ->
 										ANS = 'var_int', push(ANS, Stack, StackF);
 									member(Second, ['address_to_float']) ->
